@@ -35,6 +35,8 @@ bool WriteTGA(const char* fileName, uint16_t width, uint16_t height) {
 
     outputFile.write(reinterpret_cast<char*>(pixels.data()), pixels.size() * sizeof(Pixel));
 
+    outputFile.close();
+
     return 1;
 }
 
