@@ -8,6 +8,11 @@ struct Pixel {
     uint8_t r;
 };
 
+constexpr Pixel white = {255, 255, 255};
+constexpr Pixel red = {0, 0, 255};
+constexpr Pixel green = {0, 255, 0};
+constexpr Pixel blue = {255, 0, 0};
+
 bool WriteTGA(const char* fileName, uint16_t width, uint16_t height) {
     uint8_t header[18] = {};
 
@@ -31,7 +36,7 @@ bool WriteTGA(const char* fileName, uint16_t width, uint16_t height) {
 
     outputFile.write(reinterpret_cast<char*>(&header), sizeof(header));
 
-    std::vector<Pixel> pixels(width * height, Pixel{0, 0, 0});
+    std::vector<Pixel> pixels(width * height, red);
 
     outputFile.write(reinterpret_cast<char*>(pixels.data()), pixels.size() * sizeof(Pixel));
 
