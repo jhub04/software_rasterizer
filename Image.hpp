@@ -17,8 +17,8 @@ class Image {
         std::vector<Pixel> buffer;
     public:
         Image(uint16_t width, uint16_t height);
-        void SetPixel(uint8_t x, uint8_t y, Pixel color);
-        void DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color);
+        void SetPixel(int x, int y, Pixel color);
+        void DrawLine(int ax, int ay, int bx, int by, Pixel color);
         std::tuple<int, int> ProjectTo2D(Vec3 v);
         bool WriteTGAFile(const char* fileName);
 };

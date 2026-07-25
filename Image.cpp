@@ -6,11 +6,11 @@ Image::Image(uint16_t width, uint16_t height) : width(width), height(height) {
     buffer = std::vector<Pixel>(width * height, Pixel{0, 0, 0});
 };
 
-void Image::SetPixel(uint8_t x, uint8_t y, Pixel color) {
+void Image::SetPixel(int x, int y, Pixel color) {
     buffer[y * width + x] = color;
 }
 
-void Image::DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color) {
+void Image::DrawLine(int ax, int ay, int bx, int by, Pixel color) {
     // Allow for drawing lines both ways
     if (ax > bx) {
         std::swap(ax, bx);
@@ -27,7 +27,7 @@ void Image::DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color
 
     for (uint8_t x = ax; x <= bx; x++) {
         float t = (x - ax) / static_cast<float>(bx - ax);
-        uint8_t y = std::round(ay + t * (by - ay));
+        int y = std::round(ay + t * (by - ay));
 
         if (steep) {
             SetPixel(y, x, color);
@@ -38,8 +38,8 @@ void Image::DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color
 }
 
 std::tuple<int, int> Image::ProjectTo2D(Vec3 v) {
-    uint8_t x_proj = (v.x + 1.0) * width / 2;
-    uint8_t y_proj = (v.y + 1.0) * height / 2;
+    int x_proj = (v.x + 1.0) * width / 2;
+    int y_proj = (v.y + 1.0) * height / 2;
     return { x_proj, y_proj };
 }
 
