@@ -17,6 +17,8 @@ class Mesh {
         std::vector<Face> faces;
     public:
         Mesh(const char* fPath);
+        std::vector<Vec3>& GetVertices() {return vertices;}
+        std::vector<Face>& GetFaces() {return faces;}
 };
 
 
