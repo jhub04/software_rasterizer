@@ -8,8 +8,8 @@ constexpr Pixel green = {0, 255, 0};
 constexpr Pixel blue = {255, 0, 0};
 
 int main(int argc, char* argv[]) {
-    constexpr uint16_t width = 800;
-    constexpr uint16_t height = 800;
+    constexpr uint16_t width = 1620;
+    constexpr uint16_t height = 1620;
 
     if (argc < 3) {
         std::cerr << "Two arguments is required!" << std::endl;
