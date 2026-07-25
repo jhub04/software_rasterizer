@@ -6,15 +6,29 @@ constexpr Pixel green = {0, 255, 0};
 constexpr Pixel blue = {255, 0, 0};
 
 void DrawLine(Image& img, Pixel color, uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by) {
-    float t = 0;
+    // Allow for drawing lines both ways
+    if (ax > bx) {
+        std::swap(ax, bx);
+        std::swap(ay, by);
+    }
 
-    while (t <= 1.0f) {
-        uint8_t x = ax + t * (bx - ax);
-        uint8_t y = ay + t * (by - ay);
+    bool steep = (by - ay) / static_cast<float>(bx - ax) >= 1;
 
-        img.SetPixel(x, y, color);
+    // Transpose if too steep
+    if (steep) {
+        std::swap(ax, ay);
+        std::swap(bx, by);
+    }
 
-        t += 0.0001;
+    for (uint8_t x = ax; x <= bx; x++) {
+        float t = (x - ax) / static_cast<float>(bx - ax);
+        uint8_t y = std::round(ay + t * (by - ay));
+
+        if (steep) {
+            img.SetPixel(y, x, color);
+        } else {
+            img.SetPixel(x, y, color);
+        }
     }
 }
 
@@ -27,6 +41,10 @@ int main() {
     uint8_t ax = 7, ay = 3;
     uint8_t bx = 12, by = 37;
     uint8_t cx = 62, cy = 53;
+
+    img.SetPixel(ax, ay, white);
+    img.SetPixel(bx, by, white);
+    img.SetPixel(cx, cy, white);
 
     DrawLine(img, blue, ax, ay, bx, by);
     DrawLine(img, red, ax, ay, cx, cy);
