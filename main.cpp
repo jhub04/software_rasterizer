@@ -11,20 +11,14 @@ int main(int argc, char* argv[]) {
     constexpr uint16_t width = 64;
     constexpr uint16_t height = 64;
 
-    std::cout << "Program start" << std::endl;
-
-    if (argc == 1) {
-        std::cerr << "No arguments found" << std::endl;
+    if (argc != 2) {
+        std::cerr << "Only one argument is supported!" << std::endl;
         return 1;
     }
 
-    if (argc == 2) {
-        std::cout << argv[1] << std::endl;
+    const char* inputPath = argv[1];
 
-        const char* inputPath = argv[1];
-
-        Mesh mesh( inputPath);
-    }
+    Mesh mesh( inputPath);
 
     return 0;
 }
