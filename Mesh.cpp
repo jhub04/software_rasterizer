@@ -25,7 +25,21 @@ Mesh::Mesh(const char* path) {
             ss >> vert.x >> vert.y >> vert.z;
             vertices.push_back(vert);
         }
+        else if (prefix == "f") {
+            Face face;
+            for (int i = 0; i < 3; i++) {
+                std::string group;
+                ss >> group;
+
+                std::istringstream iss(group);
+                std::string token;
+                std::getline(iss, token, '/');
+                face.vIndices[i] = std::stoi(token) - 1;
+            }
+            faces.push_back(face);
+        }
     }
 
     std::cout << "Num vertices: " << vertices.size() << std::endl;
+    std::cout << "Num faces: " << faces.size() << std::endl;
 };
