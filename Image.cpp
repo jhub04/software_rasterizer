@@ -12,12 +12,7 @@ void Image::SetPixel(int x, int y, Pixel color) {
 
 void Image::DrawLine(int ax, int ay, int bx, int by, Pixel color) {
     // Allow for drawing lines both ways
-    if (ax > bx) {
-        std::swap(ax, bx);
-        std::swap(ay, by);
-    }
-
-    bool steep = (by - ay) / static_cast<float>(bx - ax) >= 1;
+    bool steep = std::abs(by - ay) / std::abs(static_cast<float>(bx - ax)) >= 1;
 
     // Transpose if too steep
     if (steep) {
@@ -25,7 +20,12 @@ void Image::DrawLine(int ax, int ay, int bx, int by, Pixel color) {
         std::swap(bx, by);
     }
 
-    for (uint8_t x = ax; x <= bx; x++) {
+    if (ax > bx) {
+        std::swap(ax, bx);
+        std::swap(ay, by);
+    }
+
+    for (int x = ax; x <= bx; x++) {
         float t = (x - ax) / static_cast<float>(bx - ax);
         int y = std::round(ay + t * (by - ay));
 
