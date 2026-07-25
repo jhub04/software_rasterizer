@@ -3,10 +3,10 @@
 #include <iostream>
 
 Image::Image(uint16_t width, uint16_t height) : width(width), height(height) {
-    buffer = std::vector<Color>(width * height, Color{0, 0, 0});
+    buffer = std::vector<Pixel>(width * height, Pixel{0, 0, 0});
 };
 
-void Image::SetPixel(uint8_t x, uint8_t y, Color color) {
+void Image::SetPixel(uint8_t x, uint8_t y, Pixel color) {
     buffer[y * width + x] = color;
 }
 
@@ -33,7 +33,7 @@ bool Image::WriteTGAFile(const char *fileName) {
 
     outputFile.write(reinterpret_cast<char*>(&header), sizeof(header));
 
-    outputFile.write(reinterpret_cast<char*>(buffer.data()), buffer.size() * sizeof(Color));
+    outputFile.write(reinterpret_cast<char*>(buffer.data()), buffer.size() * sizeof(Pixel));
 
     outputFile.close();
 

@@ -1,9 +1,9 @@
 #include "image.hpp"
 
-constexpr Color white = {255, 255, 255};
-constexpr Color red = {0, 0, 255};
-constexpr Color green = {0, 255, 0};
-constexpr Color blue = {255, 0, 0};
+constexpr Pixel white = {255, 255, 255};
+constexpr Pixel red = {0, 0, 255};
+constexpr Pixel green = {0, 255, 0};
+constexpr Pixel blue = {255, 0, 0};
 
 int main() {
     constexpr uint16_t width = 64;
