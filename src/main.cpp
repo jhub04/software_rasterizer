@@ -15,9 +15,11 @@ int main(int argc, char* argv[]) {
     const char* srcPath = argv[1];
     const char* dstPath = argv[2];
 
+    Camera camera(width, height);
+
     Mesh mesh(srcPath);
 
-    Image img(width, height);
+    Image img(camera);
 
     img.DrawMesh(mesh);
 

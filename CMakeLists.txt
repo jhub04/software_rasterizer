@@ -8,4 +8,6 @@ add_executable(software_rasterizer src/main.cpp
         src/Image.cpp
         src/Mesh.cpp
         include/Mesh.hpp
-        include/Types.hpp)
+        include/Types.hpp
+        include/Camera.hpp
+        src/Camera.cpp)

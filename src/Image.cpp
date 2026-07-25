@@ -2,12 +2,12 @@
 #include <fstream>
 #include <iostream>
 
-Image::Image(uint16_t width, uint16_t height) : width(width), height(height) {
-    buffer = std::vector<Pixel>(width * height, Pixel{0, 0, 0});
-};
+Image::Image(const Camera& camera)
+    : camera(camera),
+      buffer(camera.GetWidth() * camera.GetHeight(), Pixel{0, 0, 0}) {};
 
 void Image::SetPixel(const Vec2i& v, Pixel color) {
-    buffer[v.y * width + v.x] = color;
+    buffer[v.y * camera.GetWidth() + v.x] = color;
 }
 
 void Image::DrawLine(const Vec2i& a, const Vec2i& b, Pixel color) {
@@ -41,15 +41,9 @@ void Image::DrawLine(const Vec2i& a, const Vec2i& b, Pixel color) {
     }
 }
 
-Vec2i Image::ProjectTo2D(const Vec3f& v) {
-    int x_proj = (v.x + 1.0) * width / 2;
-    int y_proj = (v.y + 1.0) * height / 2;
-    return Vec2i(x_proj, y_proj);
-}
-
 void Image::DrawMesh(const Mesh& mesh) {
     for (const Vec3f& v : mesh.GetVertices()) {
-        Vec2i proj = ProjectTo2D(v);
+        Vec2i proj = camera.ProjectTo2D(v);
         SetPixel(proj, red);
     }
 
@@ -60,9 +54,9 @@ void Image::DrawMesh(const Mesh& mesh) {
         Vec3f v2 = vertices[f.vIndices[1]];
         Vec3f v3 = vertices[f.vIndices[2]];
 
-        Vec2i a = ProjectTo2D(v1);
-        Vec2i b = ProjectTo2D(v2);
-        Vec2i c = ProjectTo2D(v3);
+        Vec2i a = camera.ProjectTo2D(v1);
+        Vec2i b = camera.ProjectTo2D(v2);
+        Vec2i c = camera.ProjectTo2D(v3);
 
         DrawLine(a, b, red);
         DrawLine(a, c, red);
@@ -78,10 +72,10 @@ bool Image::WriteTGAFile(const char *fileName) {
     // Image type
     header[2] = 2;
 
-    header[12] = width & 0xFF;
-    header[13] = (width >> 8) & 0xFF;
-    header[14] = height & 0xFF;
-    header[15] = (height >> 8) & 0xFF;
+    header[12] = camera.GetWidth() & 0xFF;
+    header[13] = (camera.GetWidth() >> 8) & 0xFF;
+    header[14] = camera.GetHeight() & 0xFF;
+    header[15] = (camera.GetHeight() >> 8) & 0xFF;
 
     // Bits per pixel
     header[16] = 24;
