@@ -16,6 +16,7 @@ class Image {
     public:
         Image(uint16_t width, uint16_t height);
         void SetPixel(uint8_t x, uint8_t y, Pixel color);
+        void DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color);
         bool WriteTGAFile(const char* fileName);
 };
 

@@ -10,6 +10,33 @@ void Image::SetPixel(uint8_t x, uint8_t y, Pixel color) {
     buffer[y * width + x] = color;
 }
 
+void Image::DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color) {
+    // Allow for drawing lines both ways
+    if (ax > bx) {
+        std::swap(ax, bx);
+        std::swap(ay, by);
+    }
+
+    bool steep = (by - ay) / static_cast<float>(bx - ax) >= 1;
+
+    // Transpose if too steep
+    if (steep) {
+        std::swap(ax, ay);
+        std::swap(bx, by);
+    }
+
+    for (uint8_t x = ax; x <= bx; x++) {
+        float t = (x - ax) / static_cast<float>(bx - ax);
+        uint8_t y = std::round(ay + t * (by - ay));
+
+        if (steep) {
+            SetPixel(y, x, color);
+        } else {
+            SetPixel(x, y, color);
+        }
+    }
+}
+
 bool Image::WriteTGAFile(const char *fileName) {
     uint8_t header[18] = {};
 
