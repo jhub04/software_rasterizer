@@ -3,9 +3,9 @@ project(software_rasterizer)
 
 set(CMAKE_CXX_STANDARD 20)
 
-add_executable(software_rasterizer main.cpp
-        image.hpp
-        image.cpp
-        Mesh.cpp
-        Mesh.hpp
-        Types.hpp)
+add_executable(software_rasterizer src/main.cpp
+        include/Image.hpp
+        src/Image.cpp
+        src/Mesh.cpp
+        include/Mesh.hpp
+        include/Types.hpp)

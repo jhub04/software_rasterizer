@@ -1,5 +1,5 @@
-#include "Image.hpp"
-#include "Mesh.hpp"
+#include "../include/Image.hpp"
+#include "../include/Mesh.hpp"
 #include <iostream>
 #include <filesystem>
 
