@@ -7,4 +7,5 @@ add_executable(software_rasterizer main.cpp
         image.hpp
         image.cpp
         Mesh.cpp
-        Mesh.hpp)
+        Mesh.hpp
+        Types.hpp)

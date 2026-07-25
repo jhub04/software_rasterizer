@@ -1,15 +1,8 @@
 #ifndef MESH_HPP
 #define MESH_HPP
 
+#include "Types.hpp"
 #include <vector>
-
-struct Vec3 {
-    float x, y, z;
-};
-
-struct Face {
-    int vIndices[3];
-};
 
 class Mesh {
     private:

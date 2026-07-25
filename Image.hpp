@@ -2,13 +2,7 @@
 #define IMAGE_HPP
 #include <vector>
 
-#include "Mesh.hpp"
-
-struct Pixel {
-    uint8_t b;
-    uint8_t g;
-    uint8_t r;
-};
+#include "Types.hpp"
 
 class Image {
     private:
