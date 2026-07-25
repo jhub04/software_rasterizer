@@ -3,7 +3,7 @@
 #include <sstream>
 #include <iostream>
 
-Mesh::Mesh(const char* path) {
+Mesh::Mesh(const std::filesystem::path path) {
     std::ifstream inputFile(path);
 
     if (!inputFile.is_open()) {

@@ -3,13 +3,14 @@
 
 #include "Types.hpp"
 #include <vector>
+#include <filesystem>
 
 class Mesh {
     private:
         std::vector<Vec3f> vertices;
         std::vector<Face> faces;
     public:
-        Mesh(const char* fPath);
+        Mesh(const std::filesystem::path path);
         const std::vector<Vec3f>& GetVertices() const {return vertices;}
         const std::vector<Face>& GetFaces() const {return faces;}
 };
