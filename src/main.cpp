@@ -13,15 +13,26 @@ int main(int argc, char* argv[]) {
     }
 
     const char* srcPath = argv[1];
-    const char* dstPath = argv[2];
+    const char* dstPath = argv[argc - 1];
 
     Camera camera(width, height);
 
-    Mesh mesh(srcPath);
+    std::vector<Mesh> meshes;
+
+    if (std::filesystem::is_directory(srcPath)) {
+        for (auto const& dirEntry : std::filesystem::directory_iterator(srcPath)) {
+            Mesh mesh(dirEntry);
+            meshes.push_back(mesh);
+        }
+    }
 
     Image img(camera);
 
-    img.DrawMesh(mesh);
+    std::cout << "Num meshes: " << meshes.size() << std::endl;
+
+    for (const Mesh& mesh : meshes) {
+        img.DrawMesh(mesh);
+    }
 
     img.WriteTGAFile(dstPath);
 
