@@ -47,6 +47,30 @@ Vec2i Image::ProjectTo2D(Vec3f v) {
     return Vec2i(x_proj, y_proj);
 }
 
+void Image::DrawMesh(const Mesh& mesh) {
+    for (const Vec3f& v : mesh.GetVertices()) {
+        Vec2i proj = ProjectTo2D(v);
+        SetPixel(proj, red);
+    }
+
+    for (const Face& f : mesh.GetFaces()) {
+        const std::vector<Vec3f>& vertices= mesh.GetVertices();
+
+        Vec3f v1 = vertices[f.vIndices[0]];
+        Vec3f v2 = vertices[f.vIndices[1]];
+        Vec3f v3 = vertices[f.vIndices[2]];
+
+        Vec2i a = ProjectTo2D(v1);
+        Vec2i b = ProjectTo2D(v2);
+        Vec2i c = ProjectTo2D(v3);
+
+        DrawLine(a, b, red);
+        DrawLine(a, c, red);
+        DrawLine(b, c, red);
+    }
+}
+
+
 
 bool Image::WriteTGAFile(const char *fileName) {
     uint8_t header[18] = {};

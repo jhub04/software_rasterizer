@@ -10,8 +10,8 @@ class Mesh {
         std::vector<Face> faces;
     public:
         Mesh(const char* fPath);
-        std::vector<Vec3f>& GetVertices() {return vertices;}
-        std::vector<Face>& GetFaces() {return faces;}
+        const std::vector<Vec3f>& GetVertices() const {return vertices;}
+        const std::vector<Face>& GetFaces() const {return faces;}
 };
 
 
