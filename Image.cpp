@@ -6,13 +6,15 @@ Image::Image(uint16_t width, uint16_t height) : width(width), height(height) {
     buffer = std::vector<Pixel>(width * height, Pixel{0, 0, 0});
 };
 
-void Image::SetPixel(int x, int y, Pixel color) {
-    buffer[y * width + x] = color;
+void Image::SetPixel(const Vec2i& v, Pixel color) {
+    buffer[v.y * width + v.x] = color;
 }
 
-void Image::DrawLine(int ax, int ay, int bx, int by, Pixel color) {
+void Image::DrawLine(const Vec2i& a, const Vec2i& b, Pixel color) {
+    int ax = a.x, ay = a.y, bx = b.x, by = b.y;
+
     // Allow for drawing lines both ways
-    bool steep = std::abs(by - ay) / std::abs(static_cast<float>(bx - ax)) >= 1;
+    bool steep = std::abs(b.y - a.y) / std::abs(static_cast<float>(b.x - a.x)) >= 1;
 
     // Transpose if too steep
     if (steep) {
@@ -30,17 +32,19 @@ void Image::DrawLine(int ax, int ay, int bx, int by, Pixel color) {
         int y = std::round(ay + t * (by - ay));
 
         if (steep) {
-            SetPixel(y, x, color);
+            Vec2i v(y, x);
+            SetPixel(v, color);
         } else {
-            SetPixel(x, y, color);
+            Vec2i v(x, y);
+            SetPixel(v, color);
         }
     }
 }
 
-std::tuple<int, int> Image::ProjectTo2D(Vec3f v) {
+Vec2i Image::ProjectTo2D(Vec3f v) {
     int x_proj = (v.x + 1.0) * width / 2;
     int y_proj = (v.y + 1.0) * height / 2;
-    return { x_proj, y_proj };
+    return Vec2i(x_proj, y_proj);
 }
 
 
