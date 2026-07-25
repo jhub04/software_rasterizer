@@ -21,6 +21,9 @@ int main(int argc, char* argv[]) {
 
     if (std::filesystem::is_directory(srcPath)) {
         for (auto const& dirEntry : std::filesystem::directory_iterator(srcPath)) {
+            if (dirEntry.path().extension() != ".obj") {
+                continue;
+            }
             Mesh mesh(dirEntry);
             meshes.push_back(mesh);
         }
