@@ -8,7 +8,7 @@ struct Vec3 {
 };
 
 struct Face {
-    uint8_t vIndices[3];
+    int vIndices[3];
 };
 
 class Mesh {
