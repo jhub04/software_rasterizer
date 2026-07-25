@@ -37,6 +37,13 @@ void Image::DrawLine(uint8_t ax, uint8_t ay, uint8_t bx, uint8_t by, Pixel color
     }
 }
 
+std::tuple<int, int> Image::ProjectTo2D(Vec3 v) {
+    uint8_t x_proj = (v.x + 1.0) * width / 2;
+    uint8_t y_proj = (v.y + 1.0) * height / 2;
+    return { x_proj, y_proj };
+}
+
+
 bool Image::WriteTGAFile(const char *fileName) {
     uint8_t header[18] = {};
 
