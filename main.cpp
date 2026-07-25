@@ -1,4 +1,4 @@
-#include "image.hpp"
+#include "Image.hpp"
 
 constexpr Pixel white = {255, 255, 255};
 constexpr Pixel red = {0, 0, 255};

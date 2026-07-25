@@ -5,4 +5,6 @@ set(CMAKE_CXX_STANDARD 20)
 
 add_executable(software_rasterizer main.cpp
         image.hpp
-        image.cpp)
+        image.cpp
+        Mesh.cpp
+        Mesh.hpp)
