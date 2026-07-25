@@ -17,7 +17,7 @@ class Image {
         std::vector<Pixel> buffer;
         void SetPixel(const Vec2i& v, Pixel color);
         void DrawLine(const Vec2i& a, const Vec2i& b, Pixel color);
-        Vec2i ProjectTo2D(Vec3f v);
+        Vec2i ProjectTo2D(const Vec3f& v);
     public:
         Image(uint16_t width, uint16_t height);
         void DrawMesh(const Mesh& mesh);
