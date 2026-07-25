@@ -1,25 +1,31 @@
 #include "Image.hpp"
+#include "Mesh.hpp"
+#include <iostream>
 
 constexpr Pixel white = {255, 255, 255};
 constexpr Pixel red = {0, 0, 255};
 constexpr Pixel green = {0, 255, 0};
 constexpr Pixel blue = {255, 0, 0};
 
-int main() {
+int main(int argc, char* argv[]) {
     constexpr uint16_t width = 64;
     constexpr uint16_t height = 64;
 
-    Image img(width, height);
+    std::cout << "Program start" << std::endl;
 
-    uint8_t ax = 7, ay = 3;
-    uint8_t bx = 12, by = 37;
-    uint8_t cx = 62, cy = 53;
+    if (argc == 1) {
+        std::cerr << "No arguments found" << std::endl;
+        return 1;
+    }
 
-    img.DrawLine(ax, ay, bx, by, blue);
-    img.DrawLine(ax, ay, cx, cy, red);
-    img.DrawLine(bx, by, cx, cy, green);
+    if (argc == 2) {
+        std::cout << argv[1] << std::endl;
 
-    img.WriteTGAFile("img.tga");
+        const char* inputPath = argv[1];
+
+        Mesh mesh( inputPath);
+    }
+
     return 0;
 }
 
