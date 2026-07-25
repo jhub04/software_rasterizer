@@ -11,14 +11,15 @@ int main(int argc, char* argv[]) {
     constexpr uint16_t width = 800;
     constexpr uint16_t height = 800;
 
-    if (argc != 2) {
-        std::cerr << "Only one argument is supported!" << std::endl;
+    if (argc < 3) {
+        std::cerr << "Two arguments is required!" << std::endl;
         return 1;
     }
 
-    const char* inputPath = argv[1];
+    const char* srcPath = argv[1];
+    const char* dstPath = argv[2];
 
-    Mesh mesh( inputPath);
+    Mesh mesh(srcPath);
 
     Image img(width, height);
 
@@ -43,7 +44,7 @@ int main(int argc, char* argv[]) {
         img.DrawLine(b, c, red);
     }
 
-    img.WriteTGAFile("diablo.tga");
+    img.WriteTGAFile(dstPath);
 
     return 0;
 }
