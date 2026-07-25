@@ -38,6 +38,14 @@ bool WriteTGA(const char* fileName, uint16_t width, uint16_t height) {
 
     std::vector<Pixel> pixels(width * height, red);
 
+    uint8_t ax = 7, ay = 3;
+    uint8_t bx = 12, by = 37;
+    uint8_t cx = 62, cy = 53;
+
+    pixels[ay * width + ax ] = white;
+    pixels[by * width + bx] = white;
+    pixels[cy * width + cx] = white;
+
     outputFile.write(reinterpret_cast<char*>(pixels.data()), pixels.size() * sizeof(Pixel));
 
     outputFile.close();
@@ -46,8 +54,8 @@ bool WriteTGA(const char* fileName, uint16_t width, uint16_t height) {
 }
 
 int main() {
-    uint16_t width = 64;
-    uint16_t height = 64;
+    constexpr uint16_t width = 64;
+    constexpr uint16_t height = 64;
 
     WriteTGA("file.tga", width, height);
 }
