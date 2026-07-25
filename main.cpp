@@ -23,17 +23,17 @@ int main(int argc, char* argv[]) {
 
     Image img(width, height);
 
-    for (Vec3& v : mesh.GetVertices()) {
+    for (Vec3f& v : mesh.GetVertices()) {
         std::tuple proj = img.ProjectTo2D(v);
         img.SetPixel(std::get<0>(proj), std::get<1>(proj), red);
     }
 
     for (Face& f : mesh.GetFaces()) {
-        std::vector<Vec3>& vertices= mesh.GetVertices();
+        std::vector<Vec3f>& vertices= mesh.GetVertices();
 
-        Vec3 v1 = vertices[f.vIndices[0]];
-        Vec3 v2 = vertices[f.vIndices[1]];
-        Vec3 v3 = vertices[f.vIndices[2]];
+        Vec3f v1 = vertices[f.vIndices[0]];
+        Vec3f v2 = vertices[f.vIndices[1]];
+        Vec3f v3 = vertices[f.vIndices[2]];
 
         std::tuple projV1 = img.ProjectTo2D(v1);
         std::tuple projV2 = img.ProjectTo2D(v2);

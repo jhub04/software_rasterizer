@@ -37,7 +37,7 @@ void Image::DrawLine(int ax, int ay, int bx, int by, Pixel color) {
     }
 }
 
-std::tuple<int, int> Image::ProjectTo2D(Vec3 v) {
+std::tuple<int, int> Image::ProjectTo2D(Vec3f v) {
     int x_proj = (v.x + 1.0) * width / 2;
     int y_proj = (v.y + 1.0) * height / 2;
     return { x_proj, y_proj };

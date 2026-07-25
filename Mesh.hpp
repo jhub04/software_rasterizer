@@ -6,11 +6,11 @@
 
 class Mesh {
     private:
-        std::vector<Vec3> vertices;
+        std::vector<Vec3f> vertices;
         std::vector<Face> faces;
     public:
         Mesh(const char* fPath);
-        std::vector<Vec3>& GetVertices() {return vertices;}
+        std::vector<Vec3f>& GetVertices() {return vertices;}
         std::vector<Face>& GetFaces() {return faces;}
 };
 

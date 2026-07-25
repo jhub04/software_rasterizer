@@ -13,7 +13,7 @@ struct Pixel {
     uint8_t r;
 };
 
-struct Vec3 {
+struct Vec3f {
     float x, y, z;
 };
 

@@ -21,7 +21,7 @@ Mesh::Mesh(const char* path) {
         ss >> prefix;
 
         if (prefix == "v") {
-            Vec3 vert;
+            Vec3f vert;
             ss >> vert.x >> vert.y >> vert.z;
             vertices.push_back(vert);
         }
