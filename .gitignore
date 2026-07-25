@@ -2,3 +2,5 @@ file.*
 main
 cmake-build-debug
 .DS_Store
+*.png
+*tga
